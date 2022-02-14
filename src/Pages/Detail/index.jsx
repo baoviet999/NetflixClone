@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import { useParams } from 'react-router-dom';
-import moviesApi from '../../api/moviesApi';
+import moviesApi, { category } from '../../api/moviesApi';
 import apiConfig from '../../api/apiConfig';
 import './style.scss'
 import MovieList from '../../components/MovieList';
@@ -9,6 +9,7 @@ import { LazyLoadImage } from 'react-lazy-load-image-component';
 import "react-lazy-load-image-component/src/effects/blur.css";
 import StarIcon from "@material-ui/icons/Star";
 import Button from '../../components/Button';
+import { TrailerModal } from '../../components/Banner-slice';
 Detail.propTypes = {
     
 };
@@ -29,6 +30,19 @@ function Detail(props) {
         }
         fetchDetail()
     }, [info])
+    const setModalActive = async () => {
+        const modal = document.querySelector(`#modal_${item.id}`);
+        const videos = await moviesApi.getVideos(category.movie, item.id);
+
+        if (videos.results.length > 0) {
+            const videSrc = "https://www.youtube.com/embed/" + videos.results[0].key;
+            modal.querySelector(".modal__content > iframe").setAttribute("src", videSrc);
+        } else {
+            modal.querySelector(".modal__content").innerHTML = "No trailer";
+        }
+        modal.classList.toggle("active");
+    };
+
     const background = apiConfig.w500Img(item.poster_path || item.backdrop_path);
     return (
         <>
@@ -59,9 +73,14 @@ function Detail(props) {
                         </span>
                         <span>{item.vote_count} view</span>
                     </div>
-                    <Button background={{ background: "#fff", color: "#000" }} icon={"bx bx-play"}>
-                        Play Now
-                    </Button>
+                    <button
+                        className="detail__play-btn"
+                        onClick={setModalActive}
+                        style={{color : '#000', background : '#fff', display : 'flex', alignItems : 'center' , justifyContent : 'center', padding : ' 5px 10px', border : 'none', outline :'none', borderRadius : '10px'}}
+                    >
+                        <i className="bx bx-play"></i>
+                        PlayNow
+                    </button>
                 </div>
             </div>
             <div className="section">
@@ -76,6 +95,7 @@ function Detail(props) {
             <div className="section" style={{ marginTop: "15px" }}>
                 <MovieList category={"movie"} type={"upcoming"} />
             </div>
+            <TrailerModal newitem={item} />
         </>
     );
 }

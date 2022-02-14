@@ -10,9 +10,9 @@ const Modal = (props) => {
         setActive(props.active);
     }, [props.active]);
     const handleClose = () => {
-        document.querySelector('.modal').classList.remove('active')
+        document.querySelector(".modal").classList.remove("active");
         console.log(document.querySelector(".modal"));
-    }
+    };
     return (
         <div id={props.id} onClick={handleClose} className={`modal ${active ? "active" : ""}`}>
             {props.children}
@@ -24,8 +24,8 @@ export const ModalContent = (props) => {
 
     const closeModal = () => {
         if (props.onClose) {
-             props.onClose();
-        };
+            props.onClose();
+        }
         contentRef.current.parentNode.classList.remove("active");
     };
 
