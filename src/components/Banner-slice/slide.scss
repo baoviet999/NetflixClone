@@ -1,0 +1,129 @@
+@use "../../scss/" as *;
+.banner__slide {
+    &-btn {
+        display: flex;
+        align-items: center;
+        & > button {
+            // display: inline-block !important;
+            
+        }
+    }
+}
+.banner-slide__item {
+    width: 100%;
+    height: 70vh;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    position: relative;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    padding: 80px;
+    @include mobile {
+        padding: 50px 15px 50px 15px;
+    }
+    &::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        @include overlay();
+    }
+    &::after {
+        content: "";
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        height: 100px;
+        background-image: linear-gradient(to top, #000, rgba(#000, 0));
+    }
+    &__content {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding-right: 40px;
+        @include mobile {
+            flex-direction: column-reverse;
+        }
+        @include tablet {
+            margin-top : 40px;
+            padding-right: 10px;
+        }
+        &__info {
+            width: 55%;
+            padding: 0 40px;
+            position: relative;
+            @include tablet {
+                width: 100%;
+                padding : 0 40px 0 10px;
+            }
+            @include mobile {
+                width: 100%;
+                padding: 0 20px;
+            }
+            & > * ~ * {
+                margin-top: 20px;
+            }
+            .title {
+                font-size: 50px;
+                font-weight: 800px;
+                @include tablet {
+                    font-size: 30px;
+                }
+            }
+            .overview {
+                font-size: 15px;
+                font-weight: 700;
+            }
+            .btn-play,
+            .title,
+            .overview {
+                opacity: 0;
+                transform: translateY(-150px);
+                transition: all 0.5s ease;
+            }
+        }
+        &__poster {
+            position: relative;
+            img {
+                max-width: 300px;
+                border-radius: 30px;
+                box-shadow: $box-shadow;
+                min-width: unset;
+                transform: scale(0);
+                transition: all 0.8s ease;
+                @include mobile {
+                    display: none;
+                }
+            }
+        }
+    }
+
+    &.active > &__content > &__content__poster {
+        img {
+            transform: scale(1);
+        }
+    }
+    &.active > &__content > &__content__info {
+        .btn-play,
+        .title,
+        .overview {
+            opacity: 1;
+            transform: translateY(-0);
+        }
+        .btn-play {
+            transition-delay: 0.9s, 0.9s;
+        }
+        .title {
+            transition-delay: 0.3s, 0.3s;
+        }
+        .overview {
+            transition-delay: 0.6s, 0.6s;
+        }
+    }
+}

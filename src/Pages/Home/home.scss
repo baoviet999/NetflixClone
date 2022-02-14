@@ -1,0 +1,15 @@
+.list__container{
+    background :#000;
+}
+.section {
+    &__header {
+        padding : 40px 0 10px 0;
+        h2 {
+            display: table-cell;
+            vertical-align: bottom;
+            line-height: 1.25vw;
+            font-size: 1.4vw;
+            color :#e5e5e5
+        }
+    }
+}

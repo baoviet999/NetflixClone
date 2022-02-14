@@ -1,0 +1,145 @@
+@use "../../scss/" as *;
+
+.movie {
+    &__item {
+        width: 100%;
+        height: 270px;
+        border-radius: 5px;
+        position: relative;
+        border: 0px solid transparent; 
+        &.active {
+            // transform: scale(1.05);
+            z-index: 100;
+            transition: all 0.3s linear;
+            border: 1px solid red;
+            overflow: hidden;
+            .movie__item-title {
+                display: none;
+            }
+        }
+        &-more {
+            width: 100%;
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            height: 0%;
+            visibility : hidden;
+            opacity: 0;
+            background :#000;
+            transition: all 0.3s linear;
+            &.active {
+                height: 40%;
+                opacity:  1;
+                visibility: visible;
+                padding : 15px;
+            }
+        }
+        &-btn {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            &--left {
+                display: flex;
+                align-items: center;
+            }
+            &--right {
+                display: flex;
+                align-items: center;
+            }
+            &-outline {
+                width: 25px;
+                height: 25px;
+                border-radius: 50%;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                border : 1px solid #ccc;
+                &:not(:last-child) {
+                    margin-right: 10px;
+                }
+                & > svg {
+                    fill :#fff;
+                    width: 15px;
+                    height: 15px;
+                }
+            }
+        }
+        &-name{
+            margin-top: 10px;
+            display: flex;
+            align-items: flex-start;
+            flex-direction: column;
+            & > span{
+                color :#fff;
+                font-weight: 600;
+                font-size: 13px;
+            }
+        }
+        &-vote{
+            margin-top: 3px;
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content :space-between;
+            span{
+                font-size: 10px;
+                color :#fff;
+                    font-weight: 500;
+                &:first-child{
+                    display: flex;
+                    align-items: center;
+                    padding-right: 10px;
+                    & > svg {
+                        fill :yellow;
+                        width: 10px;
+                        height: 10px;
+                    }
+                }
+            }
+        }
+        &-img {
+            width: 100%;
+            height: 80% !important;
+
+            img {
+                width: 100%;
+                height: 100% !important;
+                object-fit: cover;
+                border-radius: 5px;
+            }
+        }
+        &-title {
+            width: 100%;
+            height: 20%;margin-top: 8px;
+            span {
+                color: #fff;
+                font-size: 16px;
+                font-weight: 500;
+                
+            }
+        }
+    }
+
+    &::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: #000;
+        opacity: 0;
+        transition: all 0.3s ease;
+    }
+    @media (hover: hover) {
+        &:hover::before {
+            opacity: 0.8;
+        }
+        &:hover .btn-new {
+            transform: scale(1);
+        }
+        &:hover {
+            transform: scale(1.05);
+        }
+    }
+}

@@ -1,0 +1,11 @@
+@use '../../scss/' as *;
+
+.search-input{ 
+    border: 0;
+    background : #000;
+    padding : 8px 25px;
+    font-size: 18px;
+    border-radius : 10px;
+    color : #fff;
+    
+}
