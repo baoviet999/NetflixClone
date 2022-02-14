@@ -74,7 +74,7 @@ const BannerSlideItem = (props) => {
         }
         modal.classList.toggle("active");
     };
-    const link = "/" + category[props.category] + "/" + item.id;
+    const link = "/movie/" + item.id;
     return (
         <div
             className={`banner-slide__item ${props.className}`}
@@ -87,10 +87,9 @@ const BannerSlideItem = (props) => {
                     <div className="banner__slide-btn">
                         <Link to={link}>
                             <Button
-                                style={{marginRight : '6px'}}
+                                style={{ marginRight: "6px" }}
                                 background={"#fff"}
                                 icon={"bx bx-play"}
-                                onClick={() => history.push("/movie/" + item.id)}
                             >
                                 Play
                             </Button>
